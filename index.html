@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TradeCard · ₦2 Million Weekly Draw</title>
+<meta name="description" content="Every ₦100,000 you trade on TradeCard this week = 1 ticket. 113 winners, ₦2,000,000 grand prize.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#3785FA;--navy:#0B1F4D;--lime:#CCFF00;--ice:#D7E6FF;--ink:#0B1F4D;--ink2:#3A4D75;--bg:#EEF4FF}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}
+.wrap{max-width:520px;margin:0 auto;padding:0 16px calc(32px + env(safe-area-inset-bottom))}
+.hidden{display:none!important}
+.tag{display:inline-flex;align-items:center;gap:6px;background:var(--lime);color:var(--navy);border:3px solid var(--navy);border-radius:10px;padding:3px 10px;font-weight:900;font-size:12px;letter-spacing:1.5px;box-shadow:3px 4px 0 var(--navy)}
+/* hero */
+.hero{position:relative;background:var(--blue);color:#fff;padding:calc(22px + env(safe-area-inset-top)) 16px 30px;border-bottom:4px solid var(--navy);overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.17) 1.6px,transparent 1.8px);background-size:22px 22px}
+.hin{position:relative;max-width:520px;margin:0 auto}
+.plus{position:absolute;right:18px;top:24px;width:18px;height:18px}
+.hero h1{margin-top:14px;font-weight:900;font-size:clamp(22px,6.4vw,28px);line-height:1.05;letter-spacing:-.6px;text-transform:uppercase}
+.hero h1 b{display:block;font-size:clamp(42px,13.5vw,58px);letter-spacing:-2px;color:var(--lime);text-shadow:4px 4px 0 var(--navy);margin-top:4px;white-space:nowrap}
+.hero p{margin-top:12px;font-weight:700;font-size:15.5px;color:#E4EEFF}
+.cd{margin-top:16px;display:inline-flex;align-items:center;gap:10px;background:var(--navy);border-radius:14px;padding:8px 14px 8px 10px;font-weight:800;font-size:14.5px;box-shadow:4px 5px 0 #062052}
+.cd i{width:30px;height:30px;border-radius:9px;background:var(--lime);color:var(--navy);display:flex;align-items:center;justify-content:center}.cd i svg{width:18px;height:18px}
+.cd b{color:var(--lime)}
+section{margin-top:28px}
+.eb{font-size:12px;font-weight:900;letter-spacing:1.8px;color:var(--blue)}
+h2{font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-top:4px}
+.lead{margin-top:6px;font-size:14.5px;font-weight:600;color:var(--ink2)}
+/* ticket rule */
+.tk{display:flex;margin-top:20px;filter:drop-shadow(5px 6px 0 var(--navy))}
+.tk .a{flex:1;min-width:0;background:#fff;border:3.5px solid var(--navy);border-right:none;border-radius:18px 0 0 18px;padding:14px 16px;
+ -webkit-mask:radial-gradient(circle 11px at 100% 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 11px at 100% 100%,transparent 98%,#000) bottom/100% 51% no-repeat;
+ mask:radial-gradient(circle 11px at 100% 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle 11px at 100% 100%,transparent 98%,#000) bottom/100% 51% no-repeat}
+.tk .a small{display:block;font-weight:900;font-size:11px;letter-spacing:1.4px;color:var(--blue)}
+.tk .a b{display:block;font-weight:900;font-size:clamp(26px,8vw,32px);letter-spacing:-1px;line-height:1.1}
+.tk .a span{font-weight:700;font-size:13px;color:var(--ink2)}
+.tk .b{flex:none;width:clamp(96px,28vw,116px);background:var(--lime);border:3.5px solid var(--navy);border-left:3px dashed var(--navy);border-radius:0 18px 18px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;line-height:1}
+.tk .b b{font-size:44px}.tk .b span{font-size:12px;letter-spacing:1px}
+/* winners */
+.wsec{margin-top:24px}
+.wph{margin-top:12px;background:#fff;border:3px dashed var(--navy);border-radius:18px;padding:20px 16px;text-align:center}
+.wph .ic{width:56px;height:56px;margin:0 auto;border-radius:16px;background:var(--ice);color:var(--blue);display:flex;align-items:center;justify-content:center}.wph .ic svg{width:30px;height:30px}
+.wph b{display:block;margin-top:10px;font-weight:900;font-size:17px}.wph p{margin-top:4px;font-size:14px;font-weight:600;color:var(--ink2)}
+.wph .slots{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}.wph .slots span{font-size:12px;font-weight:800;background:var(--bg);border:2px solid #C9D6EE;border-radius:999px;padding:4px 10px;color:var(--ink2)}
+.wbox{margin-top:12px;background:var(--navy);color:#fff;border-radius:22px;padding:16px;border:3.5px solid var(--navy);box-shadow:5px 6px 0 var(--blue)}
+.gp{background:var(--lime);color:var(--navy);border:3px solid #fff;border-radius:16px;padding:14px;text-align:center}
+.gp small{font-weight:900;font-size:11px;letter-spacing:1.4px}.gp .amt{font-weight:900;font-size:clamp(26px,8vw,32px);letter-spacing:-1px;line-height:1.1}
+.gp .nm{display:inline-block;margin-top:8px;background:var(--navy);color:#fff;border-radius:12px;padding:7px 14px;font-weight:900;font-size:18px}
+.wg h4{margin-top:16px;font-size:12px;font-weight:900;letter-spacing:1.3px;color:var(--lime);display:flex;justify-content:space-between;gap:8px}
+.wg h4 span{color:#9EC3FF;white-space:nowrap}
+.grid{margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:7px}
+.w{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:8px 10px;font-weight:800;font-size:14px;line-height:1.25;min-width:0;overflow-wrap:anywhere}
+.w small{display:block;font-weight:700;font-size:12px;color:#9EC3FF}.w.hit{background:var(--lime);color:var(--navy)}.w.hit small{color:var(--navy)}
+.srch{margin-top:10px;display:flex;align-items:center;gap:8px;height:46px;background:#fff;border-radius:12px;padding:0 12px}
+.srch svg{flex:none;width:18px;height:18px;color:var(--ink2)}.srch input{flex:1;min-width:0;border:0;outline:0;font-weight:700;font-size:16px;color:var(--ink);background:transparent}
+.cnt{margin-top:6px;font-size:12.5px;font-weight:700;color:#C9D6F2}
+.more{margin-top:10px;width:100%;height:44px;border-radius:12px;border:2px solid #fff;background:transparent;color:#fff;font-weight:900;font-size:14px;cursor:pointer}
+.wnote{margin-top:12px;font-size:12.5px;font-weight:600;color:#C9D6F2}
+/* calculator */
+.calc{margin-top:14px;background:#fff;border:3px solid var(--navy);border-radius:18px;padding:16px;box-shadow:4px 5px 0 var(--navy)}
+.calc label{display:block;font-weight:800;font-size:13.5px;color:var(--ink2)}
+.field{margin-top:8px;display:flex;align-items:center;height:54px;border:3px solid var(--navy);border-radius:14px;padding:0 14px;background:var(--bg)}
+.field span{font-weight:900;font-size:22px;margin-right:6px}
+.field input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-weight:900;font-size:22px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chips button{border:2px solid var(--navy);background:#fff;border-radius:999px;padding:6px 12px;font-weight:800;font-size:13px;color:var(--navy);cursor:pointer}
+.chips button.on{background:var(--lime)}
+.res{margin-top:14px;display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:14px;padding:12px 14px}
+.res b{font-weight:900;font-size:38px;color:var(--lime);line-height:1}.res span{font-weight:700;font-size:14px}
+.cap{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+/* prizes */
+.pz{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.p{display:flex;align-items:center;gap:12px;background:#fff;border:3px solid var(--navy);border-radius:16px;padding:12px 14px;box-shadow:4px 5px 0 var(--navy)}
+.p .n{flex:none;min-width:48px;height:38px;padding:0 8px;border-radius:12px;background:var(--navy);color:var(--lime);font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center}
+.p .m{flex:1;min-width:0}.p .m b{display:block;font-weight:800;font-size:15px}.p .m span{font-size:12.5px;font-weight:600;color:var(--ink2)}
+.p .v{font-weight:900;font-size:clamp(17px,5vw,20px);letter-spacing:-.5px;white-space:nowrap}
+.p.g{background:var(--lime)}.p.g .v{font-size:clamp(19px,5.8vw,23px)}
+.tot{margin-top:12px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14.5px;padding:0 4px}.tot b{font-weight:900;font-size:18px;color:var(--blue)}
+/* steps */
+.steps{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.st{display:flex;gap:12px;align-items:flex-start;background:#fff;border:3px solid var(--navy);border-radius:16px;padding:12px 14px;box-shadow:4px 5px 0 var(--navy)}
+.st .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--lime);font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.st b{display:block;font-size:15.5px;font-weight:900}.st span{display:block;font-size:14px;font-weight:600;color:var(--ink2);margin-top:2px}
+/* faq / terms */
+details{margin-top:10px;background:#fff;border:3px solid var(--navy);border-radius:16px}
+summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;font-weight:800;font-size:15px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:800;color:var(--blue)}
+details[open] summary:after{content:"–"}
+details .bd{padding:0 16px 14px;font-size:14px;font-weight:600;color:var(--ink2)}
+details ul{padding-left:18px;display:flex;flex-direction:column;gap:7px}
+details ul b{color:var(--ink)}
+.safe{margin-top:22px;display:flex;gap:10px;align-items:flex-start;background:var(--ice);border-radius:14px;padding:12px 14px;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.safe svg{flex:none;width:20px;height:20px;color:var(--blue)}
+.cta{display:none;margin-top:24px;height:56px;border-radius:14px;background:var(--lime);color:var(--navy);border:3.5px solid var(--navy);box-shadow:5px 6px 0 var(--navy);align-items:center;justify-content:space-between;padding:0 8px 0 20px;font-weight:900;font-size:17px;text-transform:uppercase;text-decoration:none}
+.cta i{width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--lime);display:flex;align-items:center;justify-content:center}.cta i svg{width:19px;height:19px}
+footer{text-align:center;font-size:12.5px;color:var(--ink2);margin-top:24px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hin">
+  <svg class="plus" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke="#CCFF00" stroke-width="5" stroke-linecap="round"/></svg>
+  <span class="tag" id="weekTag">WEEKLY DRAW · 5–11 NOV</span>
+  <h1>The weekly draw<b>₦2,000,000</b></h1>
+  <p>Trade gift cards on TradeCard. 113 winners, with cash paid straight to your TC wallet.</p>
+  <div class="cd"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><span id="cdTxt">Thursday 5 – Wednesday 11 November</span></div>
+</div></header>
+
+<main class="wrap">
+
+  <div class="tk"><div class="a"><small>THE ONLY RULE</small><b>₦100,000</b><span>traded from 5 to 11 November</span></div><div class="b"><span>=</span><b>1</b><span>TICKET</span></div></div>
+
+  <!-- WINNERS: filled automatically from the winners CSV (see CONFIG.winnersCsv and SETUP.md) -->
+  <section class="wsec" id="winners" aria-labelledby="wh">
+    <div class="eb">THIS WEEK'S WINNERS</div>
+    <h2 id="wh">Winners list</h2>
+    <div class="wph" id="wph"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div><b>All 113 winners will be shown here</b><p id="wphTxt">The draw takes place on Thursday 12 November. Check back after the draw to see if you won.</p>
+      <div class="slots"><span>1 × ₦2,000,000</span><span>2 × ₦500,000</span><span>10 × ₦100,000</span><span>100 × ₦10,000</span></div></div>
+    <div class="wbox hidden" id="wbox">
+      <div class="gp" id="gpBox"><small>GRAND PRIZE</small><div class="amt">₦2,000,000</div><div class="nm" id="gpName"></div></div>
+      <div class="wg" id="wg"></div>
+      <div class="srch" id="srchBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" placeholder="Search by first name" autocomplete="off" aria-label="Search winners"></div>
+      <div class="cnt" id="cnt"></div>
+      <div class="grid" id="gL"></div>
+      <button class="more" id="more" type="button">Show all lucky winners</button>
+      <p class="wnote">Winners are notified in the app, and prizes are credited to TC wallets within 24 hours of the draw. Names show first name and masked username.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="calc">
+    <div class="eb">TICKET CALCULATOR</div>
+    <h2 id="calc">How many tickets will I get?</h2>
+    <div class="calc">
+      <label for="amt">Your total trades this week</label>
+      <div class="field"><span>₦</span><input id="amt" inputmode="numeric" autocomplete="off" value="350,000" aria-label="Amount traded in naira"></div>
+      <div class="chips" id="chips"><button data-v="100000">₦100k</button><button data-v="250000">₦250k</button><button data-v="500000">₦500k</button><button data-v="1000000">₦1M</button><button data-v="5000000">₦5M</button></div>
+      <div class="res"><b id="tix">3</b><span id="tixTxt">tickets in this week's draw</span></div>
+      <p class="cap">More trading, more tickets, more chances. Maximum 50 tickets per user per week.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="prz">
+    <div class="eb">THIS WEEK'S PRIZES</div>
+    <h2 id="prz">113 winners every week</h2>
+    <div class="pz">
+      <div class="p g"><div class="n">1×</div><div class="m"><b>Grand prize</b></div><div class="v">₦2,000,000</div></div>
+      <div class="p"><div class="n">2×</div><div class="m"><b>Second prize</b></div><div class="v">₦500,000</div></div>
+      <div class="p"><div class="n">10×</div><div class="m"><b>Third prize</b></div><div class="v">₦100,000</div></div>
+      <div class="p"><div class="n">100×</div><div class="m"><b>Lucky winners</b></div><div class="v">₦10,000</div></div>
+    </div>
+    <div class="tot"><span>Total prize pool</span><b>₦5,000,000</b></div>
+  </section>
+
+  <section aria-labelledby="how">
+    <div class="eb">HOW IT WORKS</div>
+    <h2 id="how">No sign-up needed</h2>
+    <ol class="steps">
+      <li class="st"><div class="n">1</div><div><b>Trade gift cards on TradeCard</b><span>Any completed trade from Thursday 5 to Wednesday 11 November counts.</span></div></li>
+      <li class="st"><div class="n">2</div><div><b>Collect tickets automatically</b><span>Every ₦100,000 you trade in the week = 1 ticket.</span></div></li>
+      <li class="st"><div class="n">3</div><div><b>We draw 113 winners on Thursday</b><span id="drawStep">The draw takes place on Thursday 12 November.</span></div></li>
+      <li class="st"><div class="n">4</div><div><b>Cash goes to your TC wallet</b><span>Winners are notified in the app and paid within 24 hours.</span></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="faq">
+    <div class="eb">FAQ</div>
+    <h2 id="faq">Questions</h2>
+    <details><summary>Do I need to sign up?</summary><div class="bd">No. Every completed trade counts automatically.</div></details>
+    <details><summary>Do rejected trades count?</summary><div class="bd">No. Only completed trades count. Rejected, cancelled or reversed trades don't.</div></details>
+    <details><summary>Can I win more than once?</summary><div class="bd">One prize per week, but you can win again in a later week.</div></details>
+    <details><summary>Is there a ticket limit?</summary><div class="bd">Yes, 50 tickets per user per week (₦5,000,000 traded). Tickets don't carry over to the next week.</div></details>
+    <details><summary>How will I know if I won?</summary><div class="bd">We'll notify you in the app, and the full winners list appears on this page after the draw.</div></details>
+    <details><summary>Terms and conditions</summary><div class="bd"><ul>
+      <li><b>Period:</b> Thursday 5 November 00:00 – Wednesday 11 November 2026 23:59 WAT, with one draw.</li>
+      <li><b>Eligibility:</b> registered TradeCard users in good standing. Staff, test accounts and accounts under fraud investigation are excluded.</li>
+      <li><b>Tickets:</b> 1 ticket per ₦100,000 of completed trades (naira payout) in the draw week, up to 50 tickets per user. Rejected, cancelled or reversed trades don't count. Tickets don't carry over.</li>
+      <li><b>Prizes:</b> 1 × ₦2,000,000, 2 × ₦500,000, 10 × ₦100,000, 100 × ₦10,000. One prize per user per week.</li>
+      <li><b>Draw:</b> random selection on Thursday 12 November, recorded and independently verified.</li>
+      <li><b>Payment:</b> prizes are credited to the winner's TradeCard wallet within 24 hours of the draw.</li>
+      <li><b>Publicity:</b> winners agree that their first name and masked username may be published in the app and on TradeCard's social media.</li>
+      <li><b>Fraud:</b> TradeCard may disqualify entries and recover prizes from accounts involved in fraud, duplicate accounts or abuse.</li>
+      <li><b>Changes:</b> TradeCard may amend these terms, with notice in the app.</li>
+    </ul></div></details>
+  </section>
+
+  <div class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span>Trade only inside the TradeCard app. We will never ask you to pay a fee to receive a prize.</span></div>
+
+  <a class="cta" id="cta" href="#">Start trading<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a>
+  <footer>© TradeCard · Terms apply.</footer>
+</main>
+
+<script>
+/* ===================== EDIT HERE =====================
+   start / end : draw week in Nigeria time (WAT, +01:00)
+   drawDate    : shown in the countdown, steps and winners placeholder
+   tradeLink   : in-app link to start a trade; leave "" to hide the button
+   winnersCsv  : where the winners list comes from (see SETUP.md)
+                 - "winners.csv"  -> a CSV file uploaded next to this page on GitHub
+                 - or a Google Sheet "Publish to web" CSV link (.../pub?output=csv)
+                 Keep it to the header row only until the draw.               */
+var CONFIG = {
+  weekLabel: "WEEKLY DRAW · 5–11 NOV",
+  start: "2026-11-05T00:00:00+01:00",
+  end:   "2026-11-11T23:59:59+01:00",
+  drawDate: "Thursday 12 November",
+  tradeLink: "",
+  winnersCsv: "winners.csv"
+};
+/* ===================================================== */
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  $('weekTag').textContent=CONFIG.weekLabel;
+  $('drawStep').textContent='The draw takes place on '+CONFIG.drawDate+'.';
+  if(CONFIG.tradeLink){ $('cta').href=CONFIG.tradeLink; $('cta').style.display='flex'; }
+
+  // countdown
+  var s=new Date(CONFIG.start), e=new Date(CONFIG.end), t=$('cdTxt');
+  function left(ms){var h=Math.floor(ms/36e5),d=Math.floor(h/24);h%=24;var m=Math.floor(ms/6e4)%60;return d?d+'d '+h+'h':h?h+'h '+m+'m':m+'m';}
+  function tick(){var n=new Date();
+    if(n<s) t.innerHTML='Starts in <b>'+left(s-n)+'</b>';
+    else if(n<=e) t.innerHTML='Live now · ends in <b>'+left(e-n)+'</b>';
+    else if(!WIN) t.innerHTML='Week closed · draw on <b>'+CONFIG.drawDate+'</b>';
+    else t.innerHTML='<b>Winners announced</b> · see the list below';
+  }
+  tick(); setInterval(tick,30000);
+
+  // ---------- winners (loaded from CSV: prize, first_name, username) ----------
+  var WIN=false;
+  $('wphTxt').textContent='The draw takes place on '+CONFIG.drawDate+'. Check back after the draw to see if you won.';
+  function parseCSV(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];
+    if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++;}else q=false;}else f+=c;}
+    else if(c=='"')q=true;else if(c==','){row.push(f);f='';}
+    else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);rows.push(row);row=[];f='';}else f+=c;}
+    if(f!==''||row.length){row.push(f);rows.push(row);}return rows;}
+  function mask(u){u=String(u||'').trim();if(!u||u.indexOf('*')>-1)return u;if(u.length<=4)return u[0]+'***';return u.slice(0,2)+'***'+u.slice(-2);}
+  function tier(x){x=String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+    if(/grand|2000000/.test(x))return 'grand';if(/second|500000/.test(x))return 'second';
+    if(/third|100000/.test(x))return 'third';if(/lucky|10000/.test(x))return 'lucky';return '';}
+  function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function card(w,hit){return '<div class="w'+(hit?' hit':'')+'">'+esc(w.name)+(w.user?'<small>'+esc(w.user)+'</small>':'')+'</div>'}
+  function showWinners(rows){
+    if(!rows.length) return;
+    var h=rows[0].map(function(x){return x.trim().toLowerCase()});
+    var iP=h.indexOf('prize'),iN=h.indexOf('first_name'),iU=h.indexOf('username');
+    if(iP<0||iN<0){console.warn('Winners CSV needs columns: prize, first_name, username');return;}
+    var G={grand:[],second:[],third:[],lucky:[]};
+    rows.slice(1).forEach(function(r){var t=tier(r[iP]),n=(r[iN]||'').trim();if(!t||!n)return;G[t].push({name:n,user:iU>-1?mask(r[iU]):''});});
+    var total=G.grand.length+G.second.length+G.third.length+G.lucky.length;
+    if(!total) return;
+    WIN=true; tick();
+    $('wph').classList.add('hidden'); $('wbox').classList.remove('hidden');
+    $('wh').textContent=total+' winners this week';
+    if(G.grand.length) $('gpName').textContent=G.grand[0].name+(G.grand[0].user?' ('+G.grand[0].user+')':''); else $('gpBox').classList.add('hidden');
+    function grp(t,list){return list.length?'<h4>'+t+'<span>'+list.length+' winner'+(list.length>1?'s':'')+'</span></h4><div class="grid">'+list.map(function(w){return card(w)}).join('')+'</div>':''}
+    $('wg').innerHTML=grp('SECOND PRIZE · ₦500,000',G.second)+grp('THIRD PRIZE · ₦100,000',G.third)+(G.lucky.length?'<h4>LUCKY WINNERS · ₦10,000<span>'+G.lucky.length+' winners</span></h4>':'');
+    var SHOW=20,all=false,ALL=[].concat(G.grand,G.second,G.third,G.lucky);
+    function render(){var q=$('q').value.trim().toLowerCase();
+      if(q){var m=ALL.filter(function(w){return (w.name+' '+w.user).toLowerCase().indexOf(q)>-1});
+        $('gL').innerHTML=m.map(function(w){return card(w,true)}).join('');
+        $('cnt').textContent=m.length?m.length+' match'+(m.length>1?'es':''):'No match. Check the spelling, or look through the lists above.';
+        $('more').classList.add('hidden');return;}
+      $('cnt').textContent='';var l=all?G.lucky:G.lucky.slice(0,SHOW);
+      $('gL').innerHTML=l.map(function(w){return card(w)}).join('');
+      $('more').classList.toggle('hidden',all||G.lucky.length<=SHOW);}
+    $('q').addEventListener('input',render);$('more').addEventListener('click',function(){all=true;render();});render();
+  }
+  if(CONFIG.winnersCsv){
+    var u=CONFIG.winnersCsv+(CONFIG.winnersCsv.indexOf('?')>-1?'&':'?')+'t='+Date.now();
+    fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();})
+      .then(function(t){showWinners(parseCSV(t.replace(/^﻿/,'')));}).catch(function(){});
+  }
+
+  // calculator
+  var inp=$('amt');
+  function calc(){
+    var v=parseInt(String(inp.value).replace(/[^0-9]/g,''),10)||0;
+    var n=Math.min(50,Math.floor(v/100000));
+    $('tix').textContent=n;
+    $('tixTxt').textContent=(n===1?'ticket':'tickets')+' in this week\'s draw'+(v>=5000000?' (maximum)':'');
+    document.querySelectorAll('#chips button').forEach(function(b){b.classList.toggle('on',+b.dataset.v===v)});
+  }
+  inp.addEventListener('input',function(){
+    var d=inp.value.replace(/[^0-9]/g,'').slice(0,10);
+    inp.value=d?Number(d).toLocaleString('en-NG'):''; calc();
+  });
+  document.querySelectorAll('#chips button').forEach(function(b){b.addEventListener('click',function(){inp.value=Number(b.dataset.v).toLocaleString('en-NG');calc();})});
+  calc();
+})();
+</script>
+</body>
+</html>
