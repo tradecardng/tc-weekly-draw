@@ -99,33 +99,57 @@ details ul b{color:var(--ink)}
 .safe svg{flex:none;width:20px;height:20px;color:var(--blue)}
 .cta{display:none;margin-top:24px;height:56px;border-radius:14px;background:var(--lime);color:var(--navy);border:3.5px solid var(--navy);box-shadow:5px 6px 0 var(--navy);align-items:center;justify-content:space-between;padding:0 8px 0 20px;font-weight:900;font-size:17px;text-transform:uppercase;text-decoration:none}
 .cta i{width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--lime);display:flex;align-items:center;justify-content:center}.cta i svg{width:19px;height:19px}
+/* draw calendar */
+.cal{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.wk{display:flex;align-items:center;gap:12px;background:#fff;border:3px solid var(--navy);border-radius:16px;padding:10px 12px}
+.wk.live{background:var(--lime);box-shadow:4px 5px 0 var(--navy)}
+.wk .nb{flex:none;width:44px;height:44px;border-radius:12px;background:var(--navy);color:var(--lime);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;line-height:1}
+.wk .nb small{font-size:9px;letter-spacing:1px;color:#fff}.wk .nb b{font-size:19px}
+.wk .md{flex:1;min-width:0}.wk .md b{display:block;font-weight:900;font-size:15px}.wk .md span{display:block;font-size:12.5px;font-weight:700;color:var(--ink2)}
+.wk .st2{flex:none;font-size:11px;font-weight:900;letter-spacing:.8px;padding:4px 8px;border-radius:999px;border:2px solid var(--navy);background:#fff;white-space:nowrap}
+.wk.live .st2{background:var(--navy);color:var(--lime)}
+.wk.done{opacity:.75}.wk.done .st2{background:var(--ice);border-color:var(--ice);color:var(--ink2)}
+.wk.done .st2.w{background:var(--blue);border-color:var(--blue);color:#fff}
+.hist{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;height:46px;border-radius:12px;border:2.5px solid rgba(255,255,255,.5);color:#fff;font-weight:800;font-size:14px;text-decoration:none}
+.hist svg{width:18px;height:18px}
+.wkhd{margin-top:2px;font-size:13px;font-weight:700;color:#C9D6F2}
 footer{text-align:center;font-size:12.5px;color:var(--ink2);margin-top:24px}
 </style>
 </head>
 <body>
 <header class="hero"><div class="hin">
   <svg class="plus" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke="#CCFF00" stroke-width="5" stroke-linecap="round"/></svg>
-  <span class="tag" id="weekTag">WEEKLY DRAW · 5–11 NOV</span>
+  <span class="tag" id="weekTag">WEEKLY DRAW</span>
   <h1>The weekly draw<b>₦2,000,000</b></h1>
   <p>Trade gift cards on TradeCard. 113 winners, with cash paid straight to your TC wallet.</p>
-  <div class="cd"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><span id="cdTxt">Thursday 5 – Wednesday 11 November</span></div>
+  <div class="cd"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><span id="cdTxt"></span></div>
 </div></header>
 
 <main class="wrap">
 
-  <div class="tk"><div class="a"><small>THE ONLY RULE</small><b>₦100,000</b><span>traded from 5 to 11 November</span></div><div class="b"><span>=</span><b>1</b><span>TICKET</span></div></div>
+  <div class="tk"><div class="a"><small>THE ONLY RULE</small><b>₦100,000</b><span id="tkDates">traded this week</span></div><div class="b"><span>=</span><b>1</b><span>TICKET</span></div></div>
 
-  <!-- WINNERS: filled automatically from the winners CSV (see CONFIG.winnersCsv and SETUP.md) -->
+  <section aria-labelledby="calh">
+    <div class="eb">DRAW CALENDAR</div>
+    <h2 id="calh">A new draw every week</h2>
+    <p class="lead">Each week runs Thursday to Wednesday. Winners are drawn the next Thursday.</p>
+    <div class="cal" id="cal"></div>
+  </section>
+
+  <!-- WINNERS: filled automatically from the winners CSV (week, prize, first_name, username) -->
   <section class="wsec" id="winners" aria-labelledby="wh">
-    <div class="eb">THIS WEEK'S WINNERS</div>
+    <div class="eb" id="web">LAST WEEK'S WINNERS</div>
     <h2 id="wh">Winners list</h2>
-    <div class="wph" id="wph"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div><b>All 113 winners will be shown here</b><p id="wphTxt">The draw takes place on Thursday 12 November. Check back after the draw to see if you won.</p>
+    <div class="wph" id="wph"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div><b id="wphB">Winners will be shown here</b><p id="wphTxt"></p>
+      <a class="more hidden" id="wphHist" href="winners.html" style="box-shadow:4px 5px 0 #0B1F4D">See winners from past weeks <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <div class="slots"><span>1 × ₦2,000,000</span><span>2 × ₦500,000</span><span>10 × ₦100,000</span><span>100 × ₦10,000</span></div></div>
     <div class="wbox hidden" id="wbox">
-      <div class="gp" id="gpBox"><small>GRAND PRIZE</small><div class="amt">₦2,000,000</div><div class="nm" id="gpName"></div></div>
+      <p class="wkhd" id="wkhd"></p>
+      <div class="gp" id="gpBox" style="margin-top:10px"><small>GRAND PRIZE</small><div class="amt">₦2,000,000</div><div class="nm" id="gpName"></div></div>
       <div class="wg" id="wg"></div>
       <a class="more" id="more" href="winners.html">See all winners <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <p class="wnote">Winners are notified in the app, and prizes are credited to TC wallets within 24 hours of the draw. Names show first name and masked username.</p>
+      <a class="hist" id="hist" href="winners.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Winners from past weeks</a>
+      <p class="wnote">Winners are notified in the app, and prizes are credited to TC wallets within 24 hours of the draw. Winners show their name or a masked user ID (e.g. R12****78).</p>
     </div>
   </section>
 
@@ -157,9 +181,9 @@ footer{text-align:center;font-size:12.5px;color:var(--ink2);margin-top:24px}
     <div class="eb">HOW IT WORKS</div>
     <h2 id="how">No sign-up needed</h2>
     <ol class="steps">
-      <li class="st"><div class="n">1</div><div><b>Trade gift cards on TradeCard</b><span>Any completed trade from Thursday 5 to Wednesday 11 November counts.</span></div></li>
+      <li class="st"><div class="n">1</div><div><b>Trade gift cards on TradeCard</b><span id="step1">Any completed trade during the draw week counts.</span></div></li>
       <li class="st"><div class="n">2</div><div><b>Collect tickets automatically</b><span>Every ₦100,000 you trade in the week = 1 ticket.</span></div></li>
-      <li class="st"><div class="n">3</div><div><b>We draw 113 winners on Thursday</b><span id="drawStep">The draw takes place on Thursday 12 November.</span></div></li>
+      <li class="st"><div class="n">3</div><div><b>We draw 113 winners on Thursday</b><span id="drawStep">The draw takes place every Thursday.</span></div></li>
       <li class="st"><div class="n">4</div><div><b>Cash goes to your TC wallet</b><span>Winners are notified in the app and paid within 24 hours.</span></div></li>
     </ol>
   </section>
@@ -171,15 +195,16 @@ footer{text-align:center;font-size:12.5px;color:var(--ink2);margin-top:24px}
     <details><summary>Do rejected trades count?</summary><div class="bd">No. Only completed trades count. Rejected, cancelled or reversed trades don't.</div></details>
     <details><summary>Can I win more than once?</summary><div class="bd">One prize per week, but you can win again in a later week.</div></details>
     <details><summary>Is there a ticket limit?</summary><div class="bd">Yes, 50 tickets per user per week (₦5,000,000 traded). Tickets don't carry over to the next week.</div></details>
-    <details><summary>How will I know if I won?</summary><div class="bd">We'll notify you in the app, and the full winners list appears on this page after the draw.</div></details>
+    <details><summary>How will I know if I won?</summary><div class="bd">We'll notify you in the app, and the winners list appears on this page after each draw. Winners from earlier weeks stay available under "Winners from past weeks".</div></details>
+    <details><summary>Does the draw run every week?</summary><div class="bd">Yes. A new draw week starts every Thursday, and the draw calendar on this page shows the current and upcoming weeks.</div></details>
     <details><summary>Terms and conditions</summary><div class="bd"><ul>
-      <li><b>Period:</b> Thursday 5 November 00:00 – Wednesday 11 November 2026 23:59 WAT, with one draw.</li>
+      <li><b>Period:</b> <span id="tcPeriod">the campaign runs in weekly rounds</span>. Each round runs Thursday 00:00 to Wednesday 23:59 WAT, with one draw per round.</li>
       <li><b>Eligibility:</b> registered TradeCard users in good standing. Staff, test accounts and accounts under fraud investigation are excluded.</li>
-      <li><b>Tickets:</b> 1 ticket per ₦100,000 of completed trades (naira payout) in the draw week, up to 50 tickets per user. Rejected, cancelled or reversed trades don't count. Tickets don't carry over.</li>
+      <li><b>Tickets:</b> 1 ticket per ₦100,000 of completed trades (naira payout) in each draw week, up to 50 tickets per user per week. Rejected, cancelled or reversed trades don't count. Tickets don't carry over.</li>
       <li><b>Prizes:</b> 1 × ₦2,000,000, 2 × ₦500,000, 10 × ₦100,000, 100 × ₦10,000. One prize per user per week.</li>
-      <li><b>Draw:</b> random selection on Thursday 12 November, recorded and independently verified.</li>
+      <li><b>Draw:</b> random selection on the Thursday after each round ends, recorded and independently verified.</li>
       <li><b>Payment:</b> prizes are credited to the winner's TradeCard wallet within 24 hours of the draw.</li>
-      <li><b>Publicity:</b> winners agree that their first name and masked username may be published in the app and on TradeCard's social media.</li>
+      <li><b>Publicity:</b> winners agree that their name or masked user ID may be published in the app and on TradeCard's social media.</li>
       <li><b>Fraud:</b> TradeCard may disqualify entries and recover prizes from accounts involved in fraud, duplicate accounts or abuse.</li>
       <li><b>Changes:</b> TradeCard may amend these terms, with notice in the app.</li>
     </ul></div></details>
@@ -192,94 +217,206 @@ footer{text-align:center;font-size:12.5px;color:var(--ink2);margin-top:24px}
 </main>
 
 <script>
-/* ===================== EDIT HERE =====================
-   start / end : draw week in Nigeria time (WAT, +01:00)
-   drawDate    : shown in the countdown, steps and winners placeholder
-   tradeLink   : in-app link to start a trade; leave "" to hide the button
-   winnersCsv  : where the winners list comes from (see SETUP.md)
-                 - "winners.csv"  -> a CSV file uploaded next to this page on GitHub
-                 - or a Google Sheet "Publish to web" CSV link (.../pub?output=csv)
-                 Keep it to the header row only until the draw.               */
-var CONFIG = {
-  weekLabel: "WEEKLY DRAW · 5–11 NOV",
-  start: "2026-11-05T00:00:00+01:00",
-  end:   "2026-11-11T23:59:59+01:00",
-  drawDate: "Thursday 12 November",
-  tradeLink: "",
-  winnersCsv: "winners.csv",
-  winnersPage: "winners.html"   // full winners list page
-};
-/* ===================================================== */
-(function(){
-  var $=function(id){return document.getElementById(id)};
-  $('weekTag').textContent=CONFIG.weekLabel;
-  $('drawStep').textContent='The draw takes place on '+CONFIG.drawDate+'.';
-  if(CONFIG.tradeLink){ $('cta').href=CONFIG.tradeLink; $('cta').style.display='flex'; }
-
-  // countdown
-  var s=new Date(CONFIG.start), e=new Date(CONFIG.end), t=$('cdTxt');
-  function left(ms){var h=Math.floor(ms/36e5),d=Math.floor(h/24);h%=24;var m=Math.floor(ms/6e4)%60;return d?d+'d '+h+'h':h?h+'h '+m+'m':m+'m';}
-  function tick(){var n=new Date();
-    if(n<s) t.innerHTML='Starts in <b>'+left(s-n)+'</b>';
-    else if(n<=e) t.innerHTML='Live now · ends in <b>'+left(e-n)+'</b>';
-    else if(!WIN) t.innerHTML='Week closed · draw on <b>'+CONFIG.drawDate+'</b>';
-    else t.innerHTML='<b>Winners announced</b> · see the list below';
+/* Shared logic for the TradeCard weekly draw pages. No need to edit this file:
+   all settings live in the CONFIG block of index.html and winners.html. */
+var DRAW = (function(){
+  var DAY = 864e5, WEEK = 7*DAY, TZ = 'Africa/Lagos';
+  function $(id){ return document.getElementById(id); }
+  function esc(x){ return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function start0(cfg){ return new Date(cfg.firstWeekStart+'T00:00:00+01:00').getTime(); }
+  function lastN(cfg){ return cfg.lastWeekStart ? Math.round((new Date(cfg.lastWeekStart+'T00:00:00+01:00').getTime()-start0(cfg))/WEEK)+1 : 0; }
+  function wk(cfg,n){ var s=start0(cfg)+(n-1)*WEEK; return {n:n,start:s,end:s+WEEK-1000,draw:s+WEEK}; }
+  function fmt(ms,o){ return new Intl.DateTimeFormat('en-GB',Object.assign({timeZone:TZ},o)).format(new Date(ms)); }
+  function range(w){
+    var a=fmt(w.start,{day:'numeric'}), am=fmt(w.start,{month:'short'}), b=fmt(w.end,{day:'numeric'}), bm=fmt(w.end,{month:'short'});
+    return am===bm ? a+'–'+b+' '+am : a+' '+am+' – '+b+' '+bm;
   }
-  tick(); setInterval(tick,30000);
-
-  // ---------- winners (loaded from CSV: prize, first_name, username) ----------
-  var WIN=false;
-  $('wphTxt').textContent='The draw takes place on '+CONFIG.drawDate+'. Check back after the draw to see if you won.';
+  function longDay(ms){ return fmt(ms,{weekday:'long',day:'numeric',month:'long'}); }
+  function shortDay(ms){ return fmt(ms,{weekday:'short',day:'numeric',month:'short'}); }
+  function current(cfg,now){
+    var n=Math.floor((now-start0(cfg))/WEEK)+1, L=lastN(cfg);
+    if(n<1) return {state:'before',w:wk(cfg,1)};
+    if(L && n>L) return {state:'over',w:wk(cfg,L)};
+    return {state:'live',w:wk(cfg,n)};
+  }
+  /* ---------- CSV ---------- */
   function parseCSV(t){var rows=[],row=[],f='',q=false;for(var i=0;i<t.length;i++){var c=t[i];
     if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++;}else q=false;}else f+=c;}
     else if(c=='"')q=true;else if(c==','){row.push(f);f='';}
     else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);rows.push(row);row=[];f='';}else f+=c;}
     if(f!==''||row.length){row.push(f);rows.push(row);}return rows;}
+  var MASKIDS=true;
+  function maskId(v){v=String(v||'').trim();return (MASKIDS&&/^R\d{8}$/i.test(v))?v.slice(0,3)+'****'+v.slice(-2):v;}
   function mask(u){u=String(u||'').trim();if(!u||u.indexOf('*')>-1)return u;if(u.length<=4)return u[0]+'***';return u.slice(0,2)+'***'+u.slice(-2);}
   function tier(x){x=String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'');
     if(/grand|2000000/.test(x))return 'grand';if(/second|500000/.test(x))return 'second';
     if(/third|100000/.test(x))return 'third';if(/lucky|10000/.test(x))return 'lucky';return '';}
-  function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-  function card(w,hit){return '<div class="w'+(hit?' hit':'')+'">'+esc(w.name)+(w.user?'<small>'+esc(w.user)+'</small>':'')+'</div>'}
-  function showWinners(rows){
-    if(!rows.length) return;
-    var h=rows[0].map(function(x){return x.trim().toLowerCase()});
-    var iP=h.indexOf('prize'),iN=h.indexOf('first_name'),iU=h.indexOf('username');
-    if(iP<0||iN<0){console.warn('Winners CSV needs columns: prize, first_name, username');return;}
-    var G={grand:[],second:[],third:[],lucky:[]};
-    rows.slice(1).forEach(function(r){var t=tier(r[iP]),n=(r[iN]||'').trim();if(!t||!n)return;G[t].push({name:n,user:iU>-1?mask(r[iU]):''});});
-    var total=G.grand.length+G.second.length+G.third.length+G.lucky.length;
-    if(!total) return;
-    WIN=true; tick();
-    $('wph').classList.add('hidden'); $('wbox').classList.remove('hidden');
-    $('wh').textContent=total+' winners this week';
-    if(G.grand.length) $('gpName').textContent=G.grand[0].name+(G.grand[0].user?' ('+G.grand[0].user+')':''); else $('gpBox').classList.add('hidden');
-    function grp(t,list){return list.length?'<h4>'+t+'<span>'+list.length+' winner'+(list.length>1?'s':'')+'</span></h4><div class="grid">'+list.map(function(w){return card(w)}).join('')+'</div>':''}
-    $('wg').innerHTML=grp('SECOND PRIZE · ₦500,000',G.second)+grp('THIRD PRIZE · ₦100,000',G.third);
-    var mr=$('more'); mr.href=CONFIG.winnersPage||'winners.html'; mr.firstChild.nodeValue='See all '+total+' winners ';
+  function weekNo(cfg,v){ v=String(v||'').trim();
+    if(/^\d{4}-\d{2}-\d{2}$/.test(v)) return Math.round((new Date(v+'T00:00:00+01:00').getTime()-start0(cfg))/WEEK)+1;
+    var m=v.match(/\d+/); return m?parseInt(m[0],10):0; }
+  function load(cfg,cb){
+    if(!cfg.winnersCsv) return cb({});
+    var u=cfg.winnersCsv+(cfg.winnersCsv.indexOf('?')>-1?'&':'?')+'t='+Date.now();
+    fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){
+      var rows=parseCSV(t.replace(/^﻿/,'')), W={};
+      if(!rows.length) return cb(W);
+      var h=rows[0].map(function(x){return x.trim().toLowerCase();});
+      var iW=h.indexOf('week'),iP=h.indexOf('prize'),iN=h.indexOf('winner'),iU=-1; if(iN<0){iN=h.indexOf('first_name');iU=h.indexOf('username');}
+      if(iW<0||iP<0||iN<0){ console.warn('Winners CSV needs columns: week, prize, winner'); return cb(W); }
+      rows.slice(1).forEach(function(r){
+        var n=weekNo(cfg,r[iW]),t=tier(r[iP]),nm=maskId(r[iN]); if(n<1||!t||!nm) return;
+        W[n]=W[n]||{grand:[],second:[],third:[],lucky:[]};
+        W[n][t].push({name:nm,user:iU>-1?mask(r[iU]):'',raw:String(r[iN]||'').trim()});
+      });
+      var now=Date.now(); Object.keys(W).forEach(function(n){ if(wk(cfg,+n).draw>now) delete W[n]; }); /* ignore weeks whose draw day hasn't come */
+      cb(W);
+    }).catch(function(){cb({});});
   }
-  if(CONFIG.winnersCsv){
-    var u=CONFIG.winnersCsv+(CONFIG.winnersCsv.indexOf('?')>-1?'&':'?')+'t='+Date.now();
-    fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();})
-      .then(function(t){showWinners(parseCSV(t.replace(/^﻿/,'')));}).catch(function(){});
+  function count(g){ return g?g.grand.length+g.second.length+g.third.length+g.lucky.length:0; }
+  function card(w,hit){ return '<div class="w'+(hit?' hit':'')+'">'+esc(w.name)+(w.user?'<small>'+esc(w.user)+'</small>':'')+'</div>'; }
+  function left(ms){var h=Math.floor(ms/36e5),d=Math.floor(h/24);h%=24;var m=Math.floor(ms/6e4)%60;return d?d+'d '+h+'h':h?h+'h '+m+'m':m+'m';}
+
+  /* ---------- campaign page ---------- */
+  function campaign(cfg){
+    if(cfg.maskIds===false) MASKIDS=false;
+    if(cfg.previewDate){ var _pd=new Date(cfg.previewDate+'T12:00:00+01:00').getTime(); Date.now=function(){return _pd;}; }
+    var now=Date.now(), cur=current(cfg,now), w=cur.w, L=lastN(cfg), WIN={};
+    if(cfg.tradeLink){ $('cta').href=cfg.tradeLink; $('cta').style.display='flex'; }
+    $('weekTag').textContent=(cur.state==='over'?'CAMPAIGN ENDED':'WEEK '+w.n+' · '+range(w).toUpperCase());
+    $('tkDates').textContent=cur.state==='over'?'traded in a draw week':'traded from '+fmt(w.start,{day:'numeric'})+' to '+fmt(w.end,{day:'numeric',month:'long'});
+    $('step1').textContent=cur.state==='over'?'Any completed trade during a draw week counted.':'Any completed trade from '+longDay(w.start)+' to '+longDay(w.end)+' counts.';
+    $('drawStep').textContent=cur.state==='over'?'The final draw took place on '+longDay(w.draw)+'.':'This week\'s draw takes place on '+longDay(w.draw)+'.';
+    $('tcPeriod').textContent='from '+longDay(start0(cfg))+(L?' to '+longDay(wk(cfg,L).end)+' '+fmt(wk(cfg,L).end,{year:'numeric'}):' '+fmt(start0(cfg),{year:'numeric'})+', weekly until TradeCard announces the end of the campaign');
+    var START_KEY=cur.state+cur.w.n, TICKS=0;
+    function tick(){ var n=Date.now(), t=$('cdTxt'), c=current(cfg,n);
+      if(c.state+c.w.n!==START_KEY){ location.reload(); return; }   /* new week started: refresh everything */
+      if(++TICKS%10===0) load(cfg,function(W){ WIN=W; cal(); winners(); });   /* re-check winners every 5 minutes */
+      if(c.state==='before') t.innerHTML='Week 1 starts in <b>'+left(c.w.start-n)+'</b>';
+      else if(c.state==='over') t.innerHTML='<b>Campaign ended</b> · thank you for trading';
+      else t.innerHTML='Week '+c.w.n+' is live · ends in <b>'+left(c.w.end-n)+'</b>';
+    }
+    tick(); setInterval(tick,30000);
+
+    function cal(){
+      var maxN=L||Math.max(cur.w.n+2,1), html='';
+      for(var n=1;n<=maxN;n++){
+        var x=wk(cfg,n), cls, st, has=count(WIN[n])>0;
+        if(now>x.end){ cls='done'; st=has?'<span class="st2 w">WINNERS OUT</span>':'<span class="st2">'+(now<x.draw?'DRAW '+fmt(x.draw,{weekday:'short'}).toUpperCase():now<x.draw+DAY?'DRAW TODAY':'COMING SOON')+'</span>'; }
+        else if(now>=x.start){ cls='live'; st='<span class="st2">LIVE NOW</span>'; }
+        else { cls=''; st='<span class="st2">UPCOMING</span>'; }
+        var row='<div class="nb"><small>WEEK</small><b>'+n+'</b></div><div class="md"><b>'+range(x)+'</b><span>Draw: '+shortDay(x.draw)+'</span></div>'+st;
+        html+= has ? '<a class="wk '+cls+'" style="text-decoration:none;color:inherit" href="'+(cfg.winnersPage||'winners.html')+'?week='+n+'">'+row+'</a>' : '<div class="wk '+cls+'">'+row+'</div>';
+      }
+      $('cal').innerHTML=html;
+    }
+    function winners(){
+      var weeks=Object.keys(WIN).map(Number).filter(function(n){return count(WIN[n]);}).sort(function(a,b){return b-a;});
+      var pend=cur.state==='live'?cur.w.n-1:(cur.state==='over'?cur.w.n:0), now2=Date.now();
+      if(pend>=1 && !count(WIN[pend]) && wk(cfg,pend).draw<=now2){
+        var px=wk(cfg,pend);
+        $('web').textContent=cur.state==='live'?'LAST WEEK\'S WINNERS':'FINAL WEEK\'S WINNERS';
+        $('wh').textContent='Week '+pend+' winners';
+        $('wphB').textContent='Winners not announced yet';
+        $('wphTxt').textContent= now2<px.draw+DAY
+          ? 'The week '+pend+' draw ('+range(px)+') takes place today, '+longDay(px.draw)+'. Winners will appear here once they\'re announced, so check back later today.'
+          : 'Winners for week '+pend+' ('+range(px)+') will be posted here shortly. Check back soon.';
+        $('wph').classList.remove('hidden'); $('wbox').classList.add('hidden');
+        var hl=$('wphHist'); hl.href=cfg.winnersPage||'winners.html'; hl.classList.toggle('hidden',!weeks.length);
+        return;
+      }
+      if(!weeks.length){
+        var first=wk(cfg,1);
+        $('wphB').textContent='Winners will be shown here';
+        $('wphTxt').textContent='The first draw takes place on '+longDay(first.draw)+'. Check back after the draw to see if you won.';
+        return;
+      }
+      var n=weeks[0], g=WIN[n], x=wk(cfg,n), total=count(g), prev=cur.state==='live'?cur.w.n-1:(cur.state==='over'?cur.w.n:0);
+      $('web').textContent=(n===prev && cur.state==='live')?'LAST WEEK\'S WINNERS':'LATEST WINNERS';
+      $('wh').textContent=total+' winners in week '+n;
+      $('wkhd').textContent='Week '+n+' · '+range(x)+' · drawn '+shortDay(x.draw);
+      $('wph').classList.add('hidden'); $('wbox').classList.remove('hidden');
+      if(g.grand.length) $('gpName').textContent=g.grand[0].name+(g.grand[0].user?' ('+g.grand[0].user+')':''); else $('gpBox').classList.add('hidden');
+      function grp(t,list){return list.length?'<h4>'+t+'<span>'+list.length+' winner'+(list.length>1?'s':'')+'</span></h4><div class="grid">'+list.map(function(w){return card(w);}).join('')+'</div>':'';}
+      $('wg').innerHTML=grp('SECOND PRIZE · ₦500,000',g.second)+grp('THIRD PRIZE · ₦100,000',g.third);
+      var mr=$('more'); mr.href=(cfg.winnersPage||'winners.html')+'?week='+n; mr.firstChild.nodeValue='See all '+total+' winners of week '+n+' ';
+      $('hist').href=cfg.winnersPage||'winners.html';
+      if(weeks.length<2) $('hist').firstChild.nextSibling.nodeValue='Winners list for every week';
+    }
+    cal();
+    load(cfg,function(W){ WIN=W; cal(); winners(); });
   }
 
-  // calculator
-  var inp=$('amt');
-  function calc(){
-    var v=parseInt(String(inp.value).replace(/[^0-9]/g,''),10)||0;
-    var n=Math.min(50,Math.floor(v/100000));
-    $('tix').textContent=n;
-    $('tixTxt').textContent=(n===1?'ticket':'tickets')+' in this week\'s draw'+(v>=5000000?' (maximum)':'');
-    document.querySelectorAll('#chips button').forEach(function(b){b.classList.toggle('on',+b.dataset.v===v)});
+  /* ---------- winners / history page ---------- */
+  function history(cfg){
+    if(cfg.maskIds===false) MASKIDS=false;
+    if(cfg.previewDate){ var _pd=new Date(cfg.previewDate+'T12:00:00+01:00').getTime(); Date.now=function(){return _pd;}; }
+    $('back').href=$('back2').href=cfg.campaignPage||'index.html';
+    var LABEL={grand:'GRAND PRIZE · ₦2,000,000',second:'SECOND PRIZE · ₦500,000',third:'THIRD PRIZE · ₦100,000',lucky:'LUCKY WINNERS · ₦10,000'};
+    var WIN={}, weeks=[], sel=0, filter='all';
+    var want=parseInt((location.search.match(/[?&]week=(\d+)/)||[])[1]||'0',10);
+    function render(){
+      var q=$('q').value.trim().toLowerCase(), html='', hits=0;
+      var list=sel==='all'?weeks:[sel];
+      list.forEach(function(n){
+        var g=WIN[n], part='';
+        ['grand','second','third','lucky'].forEach(function(t){
+          if(filter!=='all'&&filter!==t) return;
+          var l=g[t].filter(function(w){return !q||(w.name+' '+w.user+' '+(w.raw||'')).toLowerCase().indexOf(q)>-1;});
+          if(!l.length) return; hits+=l.length;
+          if(t==='grand'&&!q&&sel!=='all'){ var w=l[0]; part+='<div class="grand"><small>GRAND PRIZE</small><div class="amt">₦2,000,000</div><div class="nm">'+esc(w.name)+(w.user?' ('+esc(w.user)+')':'')+'</div></div>'; return; }
+          part+='<section><h2>'+LABEL[t]+'<span>'+l.length+' winner'+(l.length>1?'s':'')+'</span></h2><div class="grid">'+l.map(function(w){return card(w,!!q);}).join('')+'</div></section>';
+        });
+        if(part) html+= sel==='all' ? '<div class="wkdiv">Week '+n+' · '+range(wk(cfg,n))+'</div>'+part : part;
+      });
+      $('list').innerHTML=html;
+      $('cnt').textContent=q?(hits?hits+' match'+(hits>1?'es':'')+(sel==='all'?' across all weeks':''):'No match. Check the spelling, or try "All weeks".'):'';
+    }
+    function pick(n){
+      sel=n;
+      document.querySelectorAll('#weeks button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.w)===String(n));});
+      if(n==='all'){ $('wk').textContent='ALL WEEKS'; $('ttl').textContent='All winners'; $('sub').textContent='Every published winners list, newest week first.'; }
+      else { var x=wk(cfg,n); $('wk').textContent='WEEK '+n+' · '+range(x).toUpperCase(); $('ttl').textContent=count(WIN[n])+' winners in week '+n; $('sub').textContent='Drawn '+longDay(x.draw)+'. Prizes are credited to TC wallets within 24 hours of the draw.'; }
+      document.querySelectorAll('#tabs button').forEach(function(b){
+        var t=b.dataset.t, has=t==='all'||(n==='all'?weeks.some(function(k){return WIN[k][t].length;}):WIN[n][t].length);
+        b.classList.toggle('hidden',!has); if(!has&&filter===t){filter='all';}
+        b.setAttribute('aria-pressed',b.dataset.t===filter);
+      });
+      render();
+    }
+    load(cfg,function(W){
+      WIN=W; weeks=Object.keys(W).map(Number).filter(function(n){return count(W[n]);}).sort(function(a,b){return b-a;});
+      if(!weeks.length){ $('empty').classList.remove('hidden'); return; }
+      $('content').classList.remove('hidden');
+      $('weeks').innerHTML=weeks.map(function(n){return '<button data-w="'+n+'" aria-pressed="false">Week '+n+'<small>'+range(wk(cfg,n))+'</small></button>';}).join('')+(weeks.length>1?'<button data-w="all" aria-pressed="false">All weeks<small>search everything</small></button>':'');
+      document.querySelectorAll('#weeks button').forEach(function(b){b.addEventListener('click',function(){pick(b.dataset.w==='all'?'all':+b.dataset.w);});});
+      document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.t;document.querySelectorAll('#tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b);});render();});});
+      $('q').addEventListener('input',render);
+      pick(weeks.indexOf(want)>-1?want:weeks[0]);
+    });
   }
-  inp.addEventListener('input',function(){
-    var d=inp.value.replace(/[^0-9]/g,'').slice(0,10);
-    inp.value=d?Number(d).toLocaleString('en-NG'):''; calc();
-  });
-  document.querySelectorAll('#chips button').forEach(function(b){b.addEventListener('click',function(){inp.value=Number(b.dataset.v).toLocaleString('en-NG');calc();})});
-  calc();
+  return {campaign:campaign, history:history};
 })();
+
+</script>
+<script>
+/* ===================== EDIT HERE =====================
+   firstWeekStart : the Thursday the first draw week starts (YYYY-MM-DD, WAT)
+   lastWeekStart  : the Thursday the LAST draw week starts; leave "" to keep running
+   tradeLink      : in-app link to start a trade; leave "" to hide the button
+   winnersCsv     : one CSV for ALL weeks (columns: week, prize, first_name, username)
+                    "winners.csv" next to this page, or a Google Sheet "Publish to web" CSV link
+   winnersPage    : the full winners / history page                                  */
+var CONFIG = {
+  firstWeekStart: "2026-11-05",
+  lastWeekStart:  "2026-11-26",
+  tradeLink: "",
+  winnersCsv: "winners.csv",
+  maskIds: true,          // R12345678 shows as R12****78; set false to show full IDs
+  previewDate: "",        // TESTING ONLY: e.g. "2026-12-03" shows the page as on that date. Keep "" when live
+  winnersPage: "winners.html"
+};
+/* ===================================================== */
+DRAW.campaign(CONFIG);
 </script>
 </body>
 </html>
