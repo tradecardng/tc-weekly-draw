@@ -276,8 +276,29 @@ var DRAW = (function(){
   function card(w,hit){ return '<div class="w'+(hit?' hit':'')+'">'+esc(w.name)+(w.user?'<small>'+esc(w.user)+'</small>':'')+'</div>'; }
   function left(ms){var h=Math.floor(ms/36e5),d=Math.floor(h/24);h%=24;var m=Math.floor(ms/6e4)%60;return d?d+'d '+h+'h':h?h+'h '+m+'m':m+'m';}
 
+  /* ---------- analytics (Google Analytics 4) ---------- */
+  var GA_ON=false, GTM_ON=false;
+  function initGA(cfg,pageName){
+    if(cfg.previewDate) return;   /* off in preview mode */
+    if(cfg.gtmId&&/^GTM-[A-Z0-9]+$/i.test(cfg.gtmId)){   /* Google Tag Manager */
+      window.dataLayer=window.dataLayer||[];
+      dataLayer.push({campaign_page:pageName});
+      dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var g=document.createElement('script'); g.async=true; g.src='https://www.googletagmanager.com/gtm.js?id='+cfg.gtmId; document.head.appendChild(g);
+      GTM_ON=true; return;
+    }
+    if(!cfg.gaId||!/^G-[A-Z0-9]+$/i.test(cfg.gaId)) return;   /* off when no ID */
+    window.dataLayer=window.dataLayer||[]; window.gtag=function(){dataLayer.push(arguments);};
+    var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+cfg.gaId; document.head.appendChild(s);
+    gtag('js',new Date());
+    gtag('config',cfg.gaId,{page_title:pageName, campaign_page:pageName});
+    GA_ON=true;
+  }
+  function track(name,params){ params=params||{}; if(GTM_ON){ var o={event:name}; for(var k in params) o[k]=params[k]; dataLayer.push(o); } else if(GA_ON) gtag('event',name,params); }
+
   /* ---------- campaign page ---------- */
   function campaign(cfg){
+    initGA(cfg,'Weekly Draw - Main');
     if(cfg.maskIds===false) MASKIDS=false;
     if(cfg.previewDate){ var _pd=new Date(cfg.previewDate+'T12:00:00+01:00').getTime(); Date.now=function(){return _pd;}; }
     var now=Date.now(), cur=current(cfg,now), w=cur.w, L=lastN(cfg), WIN={};
@@ -344,10 +365,19 @@ var DRAW = (function(){
     }
     cal();
     load(cfg,function(W){ WIN=W; cal(); winners(); });
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a'); if(!a) return;
+      var m=(a.getAttribute('href')||'').match(/week=(\d+)/), wkn=m?+m[1]:undefined;
+      if(a.id==='more') track('see_all_winners_click',{week:wkn});
+      else if(a.id==='hist'||a.id==='wphHist') track('past_winners_click',{});
+      else if(a.classList.contains('wk')) track('calendar_week_click',{week:wkn});
+      else if(a.id==='cta') track('start_trading_click',{});
+    });
   }
 
   /* ---------- winners / history page ---------- */
   function history(cfg){
+    initGA(cfg,'Weekly Draw - Winners list');
     if(cfg.maskIds===false) MASKIDS=false;
     if(cfg.previewDate){ var _pd=new Date(cfg.previewDate+'T12:00:00+01:00').getTime(); Date.now=function(){return _pd;}; }
     $('back').href=$('back2').href=cfg.campaignPage||'index.html';
@@ -390,7 +420,12 @@ var DRAW = (function(){
       $('weeks').innerHTML=weeks.map(function(n){return '<button data-w="'+n+'" aria-pressed="false">Week '+n+'<small>'+range(wk(cfg,n))+'</small></button>';}).join('')+(weeks.length>1?'<button data-w="all" aria-pressed="false">All weeks<small>search everything</small></button>':'');
       document.querySelectorAll('#weeks button').forEach(function(b){b.addEventListener('click',function(){pick(b.dataset.w==='all'?'all':+b.dataset.w);});});
       document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.t;document.querySelectorAll('#tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b);});render();});});
+      var searched=false;
       $('q').addEventListener('input',render);
+      $('q').addEventListener('input',function(){ if(!searched&&$('q').value.trim().length>=2){ searched=true; track('winners_search',{week:sel==='all'?'all':sel}); } });   /* the search text itself is never sent */
+      $('wsel').addEventListener('change',function(){ track('week_select',{week:this.value}); });
+      document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){ track('prize_filter',{prize:b.dataset.t}); });});
+      track('winners_list_view',{week:String(drawn.indexOf(want)>-1?want:(withW[0]||drawn[0])), source:want?'week_link':'direct'});
       pick(weeks.indexOf(want)>-1?want:weeks[0]);
     });
   }
@@ -412,6 +447,8 @@ var CONFIG = {
   tradeLink: "",
   winnersCsv: "winners.csv",
   maskIds: true,          // R12345678 shows as R12****78; set false to show full IDs
+  gtmId: "",             // Google Tag Manager container ID, e.g. "GTM-ABC1234" (same in both pages)
+  gaId: "G-PCS123Y0R8",  // OR a Google Analytics 4 Measurement ID, e.g. "G-ABC123XYZ". Use one of the two; "" = no tracking
   previewDate: "",        // TESTING ONLY: e.g. "2026-12-03" shows the page as on that date. Keep "" when live
   winnersPage: "winners.html"
 };
